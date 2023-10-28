@@ -46,7 +46,7 @@ namespace HRConnect.Server.Repository
                 nuovoDipendente.Benefits = dipendente.Benefits;
 
                 _context.SaveChanges();
-                
+
             }
             return _context.Dipendenti.FirstOrDefault(d => d.Id == id);
         }

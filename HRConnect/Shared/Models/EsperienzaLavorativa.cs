@@ -15,9 +15,9 @@ namespace HRConnect.Shared.Models
         public DateTime? DataFine { get; set; }
         public string? Azienda { get; set; }
         public string? Descrizione { get; set; }
-
-        public Mansione? Mansione { get; set; }
-        public Contratto? Contratto { get; set;}
+        public string? Mansione { get; set; }
+        public string? Contratto { get; set; }
+        public int CandidatoId { get; set; }
         public Candidato? Candidato { get; set; }
     }
 }

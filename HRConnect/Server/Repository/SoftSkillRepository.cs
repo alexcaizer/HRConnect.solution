@@ -23,7 +23,7 @@ namespace HRConnect.Server.Repository
             }
         }
 
-        public IEnumerable<SoftSkill> GetAllSoftSKill()
+        public IEnumerable<SoftSkill> GetAllSoftSkill()
         {
             return _context.SoftSkills.ToList();
         }
@@ -33,10 +33,11 @@ namespace HRConnect.Server.Repository
             var nuovoSoftSkill = _context.SoftSkills.FirstOrDefault(d => d.Id == id);
             if (nuovoSoftSkill != null)
             {
-                nuovoSoftSkill.TipologiaSkill = softskill.TipologiaSkill ;
-                nuovoSoftSkill.Candidati = softskill.Candidati ;
-                nuovoSoftSkill.Dipendenti = softskill.Dipendenti ;
-                nuovoSoftSkill.LivelloContrattuale = softskill.LivelloContrattuale ;
+                nuovoSoftSkill.TipologiaSkill = softskill.TipologiaSkill;
+                nuovoSoftSkill.Candidati = softskill.Candidati;
+                nuovoSoftSkill.Dipendenti = softskill.Dipendenti;
+                nuovoSoftSkill.LivelloContrattuale = softskill.LivelloContrattuale;
+                nuovoSoftSkill.Contratti = softskill.Contratti;
 
                 _context.SaveChanges();
 

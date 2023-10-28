@@ -34,6 +34,12 @@ namespace HRConnect.Server.AppDbContext
                 .HasOne(c => c.Sede)
                 .WithOne(c => c.HR);
 
+            modelBuilder.Entity<Dipendente>()
+                .HasOne(c => c.LivelliContrattuali)
+                .WithOne(c => c.Dipendente)
+                .HasForeignKey<Dipendente>(c => c.LivelloContrattualeId);
+
+
             /* modelBuilder.Entity<PosizioneAperte>()
                  .HasOne(c => c.Contrattos)
                  .WithOne(c => c.PosizioneApertes)

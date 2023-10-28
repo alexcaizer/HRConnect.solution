@@ -11,16 +11,14 @@ namespace HRConnect.Shared.Models
     {
         [Key]
         public int SedeId { get; set; }
-        [Required]public string? Descrizione { get; set; }
-        [Required]public string? Indirizzo { get; set; }
-        [Required]public string? Recapito { get; set; }
+        public string? Descrizione { get; set; }
+        public string? Indirizzo { get; set; }
+        public string? Recapito { get; set; }
         public int HRId { get; set; }
-        public HR? HR { get; set; }
         public ICollection<Dipendente>? Dipendenti { get; set; }
         public ICollection<Colloquio>? Colloqui { get; set; }
-        
+        public Citta? Cittas { get; set; }
+        public HR? HR { get; set; }
+    }
 
-
-
-}
 }

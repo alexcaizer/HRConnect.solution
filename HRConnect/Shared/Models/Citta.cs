@@ -13,6 +13,8 @@ namespace HRConnect.Shared.Models
 
         public int Id { get; set; }
         public string? Nome { get; set; }
+        public int SedeId { get; set; }
         public Sede? Sede { get; set; }
+        public ICollection<Candidato>? Candidati { get; set; }
     }
 }

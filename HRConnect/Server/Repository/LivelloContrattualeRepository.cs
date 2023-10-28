@@ -33,10 +33,11 @@ namespace HRConnect.Server.Repository
             var nuovoLivelloContrattuale = _context.LivelliContrattuali.FirstOrDefault(d => d.Id == id);
             if (nuovoLivelloContrattuale != null)
             {
-                nuovoLivelloContrattuale.Livello = livellocontrattuale.Id;
-                nuovoLivelloContrattuale.HardSkills = livellocontrattuale.HardSkills;
-                nuovoLivelloContrattuale.SoftSkills = livellocontrattuale.SoftSkills;
+                nuovoLivelloContrattuale.Livello = livellocontrattuale.Livello;
+                nuovoLivelloContrattuale.HardSkill = livellocontrattuale.HardSkill;
+                nuovoLivelloContrattuale.SoftSkill = livellocontrattuale.SoftSkill;
                 nuovoLivelloContrattuale.Contratti = livellocontrattuale.Contratti;
+                nuovoLivelloContrattuale.Dipendente = livellocontrattuale.Dipendente;
 
 
                 _context.SaveChanges();

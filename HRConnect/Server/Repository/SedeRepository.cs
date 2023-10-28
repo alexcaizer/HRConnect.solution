@@ -36,11 +36,10 @@ namespace HRConnect.Server.Repository
                 nuovoSede.Descrizione = sede.Descrizione;
                 nuovoSede.Indirizzo = sede.Indirizzo;
                 nuovoSede.Recapito = sede.Recapito;
-                nuovoSede.Colloqui = sede.Colloqui;
-                nuovoSede.HRId = sede.HRId;
                 nuovoSede.HR = sede.HR;
                 nuovoSede.Dipendenti = sede.Dipendenti;
                 nuovoSede.Colloqui = sede.Colloqui;
+                nuovoSede.Cittas = sede.Cittas;
 
 
 

@@ -47,6 +47,8 @@ namespace HRConnect.Server.Repository
                 nuovoCandidato.HardSkills = candidato.HardSkills;
                 nuovoCandidato.Colloquio = candidato.Colloquio;
                 nuovoCandidato.EsperienzeLavorative = candidato.EsperienzeLavorative;
+                nuovoCandidato.TitoloDiStudio = candidato.TitoloDiStudio;
+                nuovoCandidato.Contratto = candidato.Contratto;
                 //da aggiungere tutto anche icollection softskill,hardskill,citta,documentoid..etc
                 nuovoCandidato.StatoDiNascita = candidato.Cognome;
                 _context.SaveChanges();

@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace HRConnect.Shared.Models
 {
-    public class Documento    {
+    public class Documento
+    {
         [Key]
 
         public int Id { get; set; }
-        public string? TipologiaDocumento;
-        public Candidato? Candidato { get; set; }
+        public string? TipologiaDocumento { get; set; }
         public bool Attivo { get; set; }
+        public Candidato? Candidato { get; set; }
+
 
     }
 }
+

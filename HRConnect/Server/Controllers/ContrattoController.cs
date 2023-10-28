@@ -6,41 +6,41 @@ namespace HRConnect.Server.Controllers
 {
 
     [ApiController]
-    [Route("api/candidati")]
-    public class CandidatiController : ControllerBase
+    [Route("api/contratto")]
+    public class ContrattoController : ControllerBase
     {
-        private ICandidatoRepository _candidatoRepository;
-        public CandidatiController(ICandidatoRepository candidatoRepository)
+        private IContrattoRepository _contrattoRepository;
+        public ContrattoController(IContrattoRepository contrattoRepository)
         {
-            _candidatoRepository = candidatoRepository;
+            _contrattoRepository = contrattoRepository;
         }
 
         [HttpGet("Lista")]
-        public ActionResult<IEnumerable<Candidato>> GetAllCandidati()
+        public ActionResult<IEnumerable<Contratto>> GetAllContratti()
         {
-            return _candidatoRepository.GetAllCandidati().ToList();
+            return _contrattoRepository.GetAllContratti().ToList();
         }
         [HttpDelete("{id}")]
-        public void DeleteCandidato(int id)
+        public void DeleteContratto(int id)
         {
-            _candidatoRepository.DeleteCandidato(id);
+            _contrattoRepository.DeleteContratto(id);
         }
 
         [HttpPost("Add")]
-        public ActionResult AddCandidato([FromBody] Candidato nuovoCandidato)
+        public ActionResult AddContratto([FromBody] Contratto nuovoContratto)
         {
-            if (nuovoCandidato == null)
+            if (nuovoContratto == null)
             {
                 return BadRequest("I dati del candidato sono incompleti.");
             }
-            _candidatoRepository.AddCandidato(nuovoCandidato);
+            _contrattoRepository.AddContratto(nuovoContratto);
             return Ok();
         }
 
         [HttpPut("Aggiorna")]
-        public ActionResult<Candidato> UpdateCandidato(int id, Candidato candidato)
+        public ActionResult<Contratto> UpdateContratto(int id, Contratto contratto)
         {
-            return _candidatoRepository.UpdateCandidato(id, candidato);
+            return _contrattoRepository.UpdateContratto(id, contratto);
         }
 
 

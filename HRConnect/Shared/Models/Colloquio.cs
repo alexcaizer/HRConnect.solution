@@ -13,14 +13,12 @@ namespace HRConnect.Shared.Models
 
         public int Id { get; set; }
         public DateTime? DataColloquio { get; set; }
+        public string? Valutazione { get; set; }
+        public string? Note { get; set; }
+        public int HRId { get; set; }
+        public int SedeId { get; set; }
         public Candidato? Candidato { get; set; }
         public HR? HR { get; set; }
         public Sede? Sede { get; set; }
-        public string? Valutazione { get; set; }
-        public string? Note { get; set; }
-
-        public int CandidatiID { get; set; }
-        
-        
     }
 }

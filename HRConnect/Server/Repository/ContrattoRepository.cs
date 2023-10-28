@@ -36,6 +36,9 @@ namespace HRConnect.Server.Repository
                 nuovoContratto.TipoContratto = contratto.TipoContratto;
                 nuovoContratto.LivelloContrattuale = contratto.LivelloContrattuale;
                 nuovoContratto.Candidato = contratto.Candidato;
+                nuovoContratto.Dipendentes = contratto.Dipendentes;
+                nuovoContratto.HardSkills = contratto.HardSkills;
+                nuovoContratto.SoftSkills = contratto.SoftSkills;
                 _context.SaveChanges();
 
             }

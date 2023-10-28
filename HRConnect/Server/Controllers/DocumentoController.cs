@@ -6,41 +6,41 @@ namespace HRConnect.Server.Controllers
 {
 
     [ApiController]
-    [Route("api/candidati")]
-    public class CandidatiController : ControllerBase
+    [Route("api/documento")]
+    public class DocumentoController : ControllerBase
     {
-        private ICandidatoRepository _candidatoRepository;
-        public CandidatiController(ICandidatoRepository candidatoRepository)
+        private IDocumentoRepository _documentoRepository;
+        public DocumentoController(IDocumentoRepository documentoRepository)
         {
-            _candidatoRepository = candidatoRepository;
+            _documentoRepository = documentoRepository;
         }
 
         [HttpGet("Lista")]
-        public ActionResult<IEnumerable<Candidato>> GetAllCandidati()
+        public ActionResult<IEnumerable<Documento>> GetAllDocumenti()
         {
-            return _candidatoRepository.GetAllCandidati().ToList();
+            return _documentoRepository.GetAllDocumenti().ToList();
         }
         [HttpDelete("{id}")]
-        public void DeleteCandidato(int id)
+        public void DeleteDocumento(int id)
         {
-            _candidatoRepository.DeleteCandidato(id);
+            _documentoRepository.DeleteDocumento(id);
         }
 
         [HttpPost("Add")]
-        public ActionResult AddCandidato([FromBody] Candidato nuovoCandidato)
+        public ActionResult AddDocumento([FromBody] Documento nuovoDocumento)
         {
-            if (nuovoCandidato == null)
+            if (nuovoDocumento == null)
             {
-                return BadRequest("I dati del candidato sono incompleti.");
+                return BadRequest("I dati del documento sono incompleti.");
             }
-            _candidatoRepository.AddCandidato(nuovoCandidato);
+            _documentoRepository.AddDocumento(nuovoDocumento);
             return Ok();
         }
 
         [HttpPut("Aggiorna")]
-        public ActionResult<Candidato> UpdateCandidato(int id, Candidato candidato)
+        public ActionResult<Documento> UpdateDocumento(int id, Documento documento)
         {
-            return _candidatoRepository.UpdateCandidato(id, candidato);
+            return _documentoRepository.UpdateDocumento(id, documento);
         }
 
 

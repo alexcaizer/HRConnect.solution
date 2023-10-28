@@ -37,6 +37,7 @@ namespace HRConnect.Server.Repository
                 nuovoHardSkill.Candidati = hardskill.Candidati;
                 nuovoHardSkill.Dipendenti = hardskill.Dipendenti;
                 nuovoHardSkill.LivelliContrattuali = hardskill.LivelliContrattuali;
+                nuovoHardSkill.Contratti = hardskill.Contratti;
 
                 _context.SaveChanges();
 

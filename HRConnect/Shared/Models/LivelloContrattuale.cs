@@ -12,11 +12,12 @@ namespace HRConnect.Shared.Models
         [Key]
         public int Id { get; set; }
         public int Livello { get; set; }
-        public ICollection<HardSkill>? HardSkills { get; set; }
-        public ICollection<SoftSkill>? SoftSkills { get; set; }
-        public ICollection<Contratto>? Contratti { get; set; }
-        //rapporto N Livelli - 1 Contratto
         public bool Attivo { get; set; }
+        public Dipendente? Dipendente { get; set; }
+        public ICollection<Contratto>? Contratti { get; set; }
+        public HardSkill? HardSkill { get; set; }
+        public SoftSkill? SoftSkill { get; set; }
+
 
     }
 }

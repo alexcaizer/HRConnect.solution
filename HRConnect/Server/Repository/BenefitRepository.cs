@@ -31,18 +31,18 @@ namespace HRConnect.Server.Repository
 
             public Benefit UpdateBenefit(int id, Benefit benefit)
             {
-                var nuovoBenefit = _context.Benefits.FirstOrDefault(d => d.Id == id);
-                if (nuovoBenefit != null)
-                {
-                    nuovoBenefit.Dipendenti = benefit.Dipendenti;
-                    nuovoBenefit.Descrizione = benefit.Descrizione;
-                    _context.SaveChanges();
+            var nuovoBenefit = _context.Benefits.FirstOrDefault(d => d.Id == id);
+            if (nuovoBenefit != null)
+            {
+                nuovoBenefit.Dipendenti = benefit.Dipendenti;
+                nuovoBenefit.Descrizione = benefit.Descrizione;
+                _context.SaveChanges();
 
-                }
-                return _context.Benefits.FirstOrDefault(d => d.Id == id);
             }
+            return _context.Benefits.FirstOrDefault(d => d.Id == id);
+        }
 
-            private ApplicationDbContext _context;
+        private ApplicationDbContext _context;
 
             public BenefitRepository(ApplicationDbContext context)
             {

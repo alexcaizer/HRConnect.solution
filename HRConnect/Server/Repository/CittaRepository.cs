@@ -35,6 +35,7 @@ namespace HRConnect.Server.Repository
             {
                 nuovoCitta.Sede = citta.Sede;
                 nuovoCitta.Nome = citta.Nome;
+                nuovoCitta.Candidati = citta.Candidati;
 
                 _context.SaveChanges();
 

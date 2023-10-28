@@ -9,38 +9,38 @@ namespace HRConnect.Server.Controllers
     [Route("api/colloquio")]
     public class ColloquioController : ControllerBase
     {
-        private ICandidatoRepository _candidatoRepository;
-        public ColloquioController(ICandidatoRepository candidatoRepository)
+        private IColloquioRepository _colloquioRepository;
+        public ColloquioController(IColloquioRepository colloquioRepository)
         {
-            _candidatoRepository = candidatoRepository;
+            _colloquioRepository = colloquioRepository;
         }
 
         [HttpGet("Lista")]
-        public ActionResult<IEnumerable<Candidato>> GetAllCandidati()
+        public ActionResult<IEnumerable<Colloquio>> GetAllColloqui()
         {
-            return _candidatoRepository.GetAllCandidati().ToList();
+            return _colloquioRepository.GetAllColloqui().ToList();
         }
         [HttpDelete("{id}")]
-        public void DeleteCandidato(int id)
+        public void DeleteColloquio(int id)
         {
-            _candidatoRepository.DeleteCandidato(id);
+            _colloquioRepository.DeleteColloquio(id);
         }
 
         [HttpPost("Add")]
-        public ActionResult AddCandidato([FromBody] Candidato nuovoCandidato)
+        public ActionResult AddColloquio([FromBody] Colloquio nuovoColloquio)
         {
-            if (nuovoCandidato == null)
+            if (nuovoColloquio == null)
             {
-                return BadRequest("I dati del candidato sono incompleti.");
+                return BadRequest("I dati del colloquio sono incompleti.");
             }
-            _candidatoRepository.AddCandidato(nuovoCandidato);
+            _colloquioRepository.AddColloquio(nuovoColloquio);
             return Ok();
         }
 
         [HttpPut("Aggiorna")]
-        public ActionResult<Candidato> UpdateCandidato(int id, Candidato candidato)
+        public ActionResult<Colloquio> UpdateColloquio(int id, Colloquio colloquio)
         {
-            return _candidatoRepository.UpdateCandidato(id, candidato);
+            return _colloquioRepository.UpdateColloquio(id, colloquio);
         }
 
 

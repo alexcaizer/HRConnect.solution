@@ -13,7 +13,7 @@ namespace HRConnect.Server.Repository
         }
 
 
-        public void DeleteTitoloStudio(int id) 
+        public void DeleteTitoloDiStudio(int id) 
         { 
             var nuovoTDS = _context.TitoliDiStudio.FirstOrDefault(d => d.Id == id);
             if (nuovoTDS != null)

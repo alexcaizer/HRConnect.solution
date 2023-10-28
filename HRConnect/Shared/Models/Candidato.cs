@@ -12,8 +12,6 @@ namespace HRConnect.Shared.Models
         [Key]
 
         public int Id { get; set; }
-        
-        
         public string? Nome { get; set; }
         public string? Cognome { get; set; }
         public string? Email { get; set; }
@@ -21,17 +19,19 @@ namespace HRConnect.Shared.Models
         public string? ComuneDiNascita { get; set; }
         public string? ProvinciaDiNascita { get; set; }
         public string? StatoDiNascita { get; set; }
-
-        public Citta? Citta { get; set; } //citta residenza
-        //---------------------------------------------
         public int DocumentoID { get; set; }
-        public Documento? Documento { get; set; }
+        public int ContrattoId { get; set; }
+        public int CittaId { get; set; }
+        public int ColloquioId { get; set; }
+
+
         public ICollection<SoftSkill>? SoftSkills { get; set; }
         public ICollection<HardSkill>? HardSkills { get; set; }
-        public ICollection<Colloquio>? Colloquio { get; set; }
-        public ICollection<EsperienzaLavorativa>? EsperienzeLavorative { get; set; } 
-        
-
-
+        public ICollection<EsperienzaLavorativa>? EsperienzeLavorative { get; set; }
+        public ICollection<TitoloDiStudio>? TitoloDiStudio { get; set; }
+        public Contratto? Contratto { get; set; }
+        public Documento? Documento { get; set; }
+        public Citta? Citta { get; set; }
+        public Colloquio? Colloquio { get; set; }
     }
 }

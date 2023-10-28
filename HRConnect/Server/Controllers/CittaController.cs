@@ -18,29 +18,29 @@ namespace HRConnect.Server.Controllers
         [HttpGet("Lista")]
         public ActionResult<IEnumerable<Citta>> GetAllCitta()
         {
-            return _candidatoRepository.GetAllCandidati().ToList();
+            return _cittaRepository.GetAllCitta().ToList();
         }
         [HttpDelete("{id}")]
-        public void DeleteCandidato(int id)
+        public void DeleteCitta(int id)
         {
-            _candidatoRepository.DeleteCandidato(id);
+            _cittaRepository.DeleteCitta(id);
         }
 
         [HttpPost("Add")]
-        public ActionResult AddCandidato([FromBody] Candidato nuovoCandidato)
+        public ActionResult AddCitta([FromBody] Citta nuovoCitta)
         {
-            if (nuovoCandidato == null)
+            if (nuovoCitta == null)
             {
-                return BadRequest("I dati del candidato sono incompleti.");
+                return BadRequest("I dati della città sono incompleti.");
             }
-            _candidatoRepository.AddCandidato(nuovoCandidato);
+            _cittaRepository.AddCitta(nuovoCitta);
             return Ok();
         }
 
         [HttpPut("Aggiorna")]
-        public ActionResult<Candidato> UpdateCandidato(int id, Candidato candidato)
+        public ActionResult<Citta> UpdateCitta(int id, Citta citta)
         {
-            return _candidatoRepository.UpdateCandidato(id, candidato);
+            return _cittaRepository.UpdateCitta(id, citta);
         }
 
 

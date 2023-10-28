@@ -6,41 +6,41 @@ namespace HRConnect.Server.Controllers
 {
 
     [ApiController]
-    [Route("api/candidati")]
-    public class CandidatiController : ControllerBase
+    [Route("api/sede")]
+    public class SedeController : ControllerBase
     {
-        private ICandidatoRepository _candidatoRepository;
-        public CandidatiController(ICandidatoRepository candidatoRepository)
+        private ISedeRepository _sedeRepository;
+        public SedeController(ISedeRepository sedeRepository)
         {
-            _candidatoRepository = candidatoRepository;
+            _sedeRepository = sedeRepository;
         }
 
         [HttpGet("Lista")]
-        public ActionResult<IEnumerable<Candidato>> GetAllCandidati()
+        public ActionResult<IEnumerable<Sede>> GetAllSedi()
         {
-            return _candidatoRepository.GetAllCandidati().ToList();
+            return _sedeRepository.GetAllSedi().ToList();
         }
         [HttpDelete("{id}")]
-        public void DeleteCandidato(int id)
+        public void DeleteSede(int id)
         {
-            _candidatoRepository.DeleteCandidato(id);
+            _sedeRepository.DeleteSede(id);
         }
 
         [HttpPost("Add")]
-        public ActionResult AddCandidato([FromBody] Candidato nuovoCandidato)
+        public ActionResult AddSede([FromBody] Sede nuovoSede)
         {
-            if (nuovoCandidato == null)
+            if (nuovoSede == null)
             {
-                return BadRequest("I dati del candidato sono incompleti.");
+                return BadRequest("I dati della sede sono incompleti.");
             }
-            _candidatoRepository.AddCandidato(nuovoCandidato);
+            _sedeRepository.AddSede(nuovoSede);
             return Ok();
         }
 
         [HttpPut("Aggiorna")]
-        public ActionResult<Candidato> UpdateCandidato(int id, Candidato candidato)
+        public ActionResult<Sede> UpdateSede(int id, Sede sede)
         {
-            return _candidatoRepository.UpdateCandidato(id, candidato);
+            return _sedeRepository.UpdateSede(id, sede);
         }
 
 

@@ -6,41 +6,41 @@ namespace HRConnect.Server.Controllers
 {
 
     [ApiController]
-    [Route("api/candidati")]
-    public class CandidatiController : ControllerBase
+    [Route("api/esperienzalavorativa")]
+    public class EsperienzaLavorativaController : ControllerBase
     {
-        private ICandidatoRepository _candidatoRepository;
-        public CandidatiController(ICandidatoRepository candidatoRepository)
+        private IEsperienzaLavorativaRepository _esperienzalavorativaRepository;
+        public EsperienzaLavorativaController(IEsperienzaLavorativaRepository esperienzalavorativaRepository)
         {
-            _candidatoRepository = candidatoRepository;
+            _esperienzalavorativaRepository = esperienzalavorativaRepository;
         }
 
         [HttpGet("Lista")]
-        public ActionResult<IEnumerable<Candidato>> GetAllCandidati()
+        public ActionResult<IEnumerable<EsperienzaLavorativa>> GetAllEsperienzeLavorative()
         {
-            return _candidatoRepository.GetAllCandidati().ToList();
+            return _esperienzalavorativaRepository.GetAllEsperienzeLavorative().ToList();
         }
         [HttpDelete("{id}")]
-        public void DeleteCandidato(int id)
+        public void DeleteEsperienzaLavorativa(int id)
         {
-            _candidatoRepository.DeleteCandidato(id);
+            _esperienzalavorativaRepository.DeleteEsperienzaLavorativa(id);
         }
 
         [HttpPost("Add")]
-        public ActionResult AddCandidato([FromBody] Candidato nuovoCandidato)
+        public ActionResult AddEsperienzaLavorativa([FromBody] EsperienzaLavorativa nuovoEsperienzaLavorativa)
         {
-            if (nuovoCandidato == null)
+            if (nuovoEsperienzaLavorativa == null)
             {
                 return BadRequest("I dati del candidato sono incompleti.");
             }
-            _candidatoRepository.AddCandidato(nuovoCandidato);
+            _esperienzalavorativaRepository.AddEsperienzaLavorativa(nuovoEsperienzaLavorativa);
             return Ok();
         }
 
         [HttpPut("Aggiorna")]
-        public ActionResult<Candidato> UpdateCandidato(int id, Candidato candidato)
+        public ActionResult<EsperienzaLavorativa> UpdateEsperienzaLavorativa(int id, EsperienzaLavorativa esperienzalavorativa)
         {
-            return _candidatoRepository.UpdateCandidato(id, candidato);
+            return _esperienzalavorativaRepository.UpdateEsperienzaLavorativa(id, esperienzalavorativa);
         }
 
 

@@ -6,41 +6,41 @@ namespace HRConnect.Server.Controllers
 {
 
     [ApiController]
-    [Route("api/candidati")]
-    public class CandidatiController : ControllerBase
+    [Route("api/softskill")]
+    public class SoftSkillController : ControllerBase
     {
-        private ICandidatoRepository _candidatoRepository;
-        public CandidatiController(ICandidatoRepository candidatoRepository)
+        private ISoftSkillRepository _softskillRepository;
+        public SoftSkillController(ISoftSkillRepository softskillRepository)
         {
-            _candidatoRepository = candidatoRepository;
+            _softskillRepository = softskillRepository;
         }
 
         [HttpGet("Lista")]
-        public ActionResult<IEnumerable<Candidato>> GetAllCandidati()
+        public ActionResult<IEnumerable<SoftSkill>> GetAllSoftSkill()
         {
-            return _candidatoRepository.GetAllCandidati().ToList();
+            return _softskillRepository.GetAllSoftSkill().ToList();
         }
         [HttpDelete("{id}")]
-        public void DeleteCandidato(int id)
+        public void DeleteSoftSkill(int id)
         {
-            _candidatoRepository.DeleteCandidato(id);
+            _softskillRepository.DeleteSoftSkill(id);
         }
 
         [HttpPost("Add")]
-        public ActionResult AddCandidato([FromBody] Candidato nuovoCandidato)
+        public ActionResult AddSoftSkill([FromBody] SoftSkill nuovoSoftSkill)
         {
-            if (nuovoCandidato == null)
+            if (nuovoSoftSkill == null)
             {
-                return BadRequest("I dati del candidato sono incompleti.");
+                return BadRequest("I dati delle softskills sono incomplete.");
             }
-            _candidatoRepository.AddCandidato(nuovoCandidato);
+            _softskillRepository.AddSoftSkill(nuovoSoftSkill);
             return Ok();
         }
 
         [HttpPut("Aggiorna")]
-        public ActionResult<Candidato> UpdateCandidato(int id, Candidato candidato)
+        public ActionResult<SoftSkill> UpdateCandidato(int id, SoftSkill softskill)
         {
-            return _candidatoRepository.UpdateCandidato(id, candidato);
+            return _softskillRepository.UpdateSoftSkill(id, softskill);
         }
 
 

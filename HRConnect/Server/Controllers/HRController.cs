@@ -6,41 +6,41 @@ namespace HRConnect.Server.Controllers
 {
 
     [ApiController]
-    [Route("api/candidati")]
-    public class CandidatiController : ControllerBase
+    [Route("api/hr")]
+    public class HRController : ControllerBase
     {
-        private ICandidatoRepository _candidatoRepository;
-        public CandidatiController(ICandidatoRepository candidatoRepository)
+        private IHRRepository _hrRepository;
+        public HRController(IHRRepository hrRepository)
         {
-            _candidatoRepository = candidatoRepository;
+            _hrRepository = hrRepository;
         }
 
         [HttpGet("Lista")]
-        public ActionResult<IEnumerable<Candidato>> GetAllCandidati()
+        public ActionResult<IEnumerable<HR>> GetAllHR()
         {
-            return _candidatoRepository.GetAllCandidati().ToList();
+            return _hrRepository.GetAllHR().ToList();
         }
         [HttpDelete("{id}")]
-        public void DeleteCandidato(int id)
+        public void DeleteHR(int id)
         {
-            _candidatoRepository.DeleteCandidato(id);
+            _hrRepository.DeleteHR(id);
         }
 
         [HttpPost("Add")]
-        public ActionResult AddCandidato([FromBody] Candidato nuovoCandidato)
+        public ActionResult AddHR([FromBody] HR nuovoHR)
         {
-            if (nuovoCandidato == null)
+            if (nuovoHR == null)
             {
-                return BadRequest("I dati del candidato sono incompleti.");
+                return BadRequest("I dati del HR sono incompleti.");
             }
-            _candidatoRepository.AddCandidato(nuovoCandidato);
+            _hrRepository.AddHR(nuovoHR);
             return Ok();
         }
 
         [HttpPut("Aggiorna")]
-        public ActionResult<Candidato> UpdateCandidato(int id, Candidato candidato)
+        public ActionResult<HR> UpdateHR(int id, HR hr)
         {
-            return _candidatoRepository.UpdateCandidato(id, candidato);
+            return _hrRepository.UpdateHR(id, hr);
         }
 
 

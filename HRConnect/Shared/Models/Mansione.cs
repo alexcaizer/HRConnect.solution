@@ -12,7 +12,9 @@ namespace HRConnect.Shared.Models
         [Key]
         public int Id { get; set; }
         public string? Descrizione { get; set; }
+        public bool Attivo { get; set; }
         public ICollection<Dipendente>? Dipendenti { get; set; }
-        public bool Attivo { get;set; }
+
     }
+
 }

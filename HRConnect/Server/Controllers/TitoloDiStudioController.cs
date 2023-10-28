@@ -6,41 +6,41 @@ namespace HRConnect.Server.Controllers
 {
 
     [ApiController]
-    [Route("api/candidati")]
-    public class CandidatiController : ControllerBase
+    [Route("api/titolidistudio")]
+    public class TitoloDiStudioController : ControllerBase
     {
-        private ICandidatoRepository _candidatoRepository;
-        public CandidatiController(ICandidatoRepository candidatoRepository)
+        private ITitoloDiStudioRepository _titolodistudioRepository;
+        public TitoloDiStudioController(ITitoloDiStudioRepository titolodistudioRepository)
         {
-            _candidatoRepository = candidatoRepository;
+            _titolodistudioRepository = titolodistudioRepository;
         }
 
         [HttpGet("Lista")]
-        public ActionResult<IEnumerable<Candidato>> GetAllCandidati()
+        public ActionResult<IEnumerable<TitoloDiStudio>> GetAllTitoliDiStudio()
         {
-            return _candidatoRepository.GetAllCandidati().ToList();
+            return _titolodistudioRepository.GetAllTitoliDiStudio().ToList();
         }
         [HttpDelete("{id}")]
-        public void DeleteCandidato(int id)
+        public void DeleteTitoloDiStudio(int id)
         {
-            _candidatoRepository.DeleteCandidato(id);
+            _titolodistudioRepository.DeleteTitoloDiStudio(id);
         }
 
         [HttpPost("Add")]
-        public ActionResult AddCandidato([FromBody] Candidato nuovoCandidato)
+        public ActionResult AddTitoloDiStudio([FromBody] TitoloDiStudio nuovoTitoloDiStudio)
         {
-            if (nuovoCandidato == null)
+            if (nuovoTitoloDiStudio == null)
             {
-                return BadRequest("I dati del candidato sono incompleti.");
+                return BadRequest("I dati del titolo sono incompleti.");
             }
-            _candidatoRepository.AddCandidato(nuovoCandidato);
+            _titolodistudioRepository.AddTitoloDiStudio(nuovoTitoloDiStudio);
             return Ok();
         }
 
         [HttpPut("Aggiorna")]
-        public ActionResult<Candidato> UpdateCandidato(int id, Candidato candidato)
+        public ActionResult<TitoloDiStudio> UpdateTitoloDiStudio(int id, TitoloDiStudio titolodistudio)
         {
-            return _candidatoRepository.UpdateCandidato(id, candidato);
+            return _titolodistudioRepository.UpdateTitoloDiStudio(id, titolodistudio);
         }
 
 

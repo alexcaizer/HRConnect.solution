@@ -35,7 +35,7 @@ namespace HRConnect.Server.Repository
             {
                 nuovoDocumento.TipologiaDocumento = documento.TipologiaDocumento;
                 nuovoDocumento.Candidato = documento.Candidato;
-                
+
 
                 _context.SaveChanges();
 

@@ -6,41 +6,41 @@ namespace HRConnect.Server.Controllers
 {
 
     [ApiController]
-    [Route("api/candidati")]
-    public class CandidatiController : ControllerBase
+    [Route("api/livellocontrattuale")]
+    public class LivelloContrattualeController : ControllerBase
     {
-        private ICandidatoRepository _candidatoRepository;
-        public CandidatiController(ICandidatoRepository candidatoRepository)
+        private ILivelloContrattualeRepository _livellocontrattualeRepository;
+        public LivelloContrattualeController(ILivelloContrattualeRepository livellocontrattualeRepository)
         {
-            _candidatoRepository = candidatoRepository;
+            _livellocontrattualeRepository = livellocontrattualeRepository;
         }
 
         [HttpGet("Lista")]
-        public ActionResult<IEnumerable<Candidato>> GetAllCandidati()
+        public ActionResult<IEnumerable<LivelloContrattuale>> GetAllLivelliContrattuali()
         {
-            return _candidatoRepository.GetAllCandidati().ToList();
+            return _livellocontrattualeRepository.GetAllLivelliContrattuali().ToList();
         }
         [HttpDelete("{id}")]
-        public void DeleteCandidato(int id)
+        public void DeleteLivelloContrattuale(int id)
         {
-            _candidatoRepository.DeleteCandidato(id);
+            _livellocontrattualeRepository.DeleteLivelloContrattuale(id);
         }
 
         [HttpPost("Add")]
-        public ActionResult AddCandidato([FromBody] Candidato nuovoCandidato)
+        public ActionResult AddLivelloContrattuale([FromBody] LivelloContrattuale nuovoLivelloContrattuale)
         {
-            if (nuovoCandidato == null)
+            if (nuovoLivelloContrattuale == null)
             {
                 return BadRequest("I dati del candidato sono incompleti.");
             }
-            _candidatoRepository.AddCandidato(nuovoCandidato);
+            _livellocontrattualeRepository.AddLivelloContrattuale(nuovoLivelloContrattuale);
             return Ok();
         }
 
         [HttpPut("Aggiorna")]
-        public ActionResult<Candidato> UpdateCandidato(int id, Candidato candidato)
+        public ActionResult<LivelloContrattuale> UpdateLivelloContrattuale(int id, LivelloContrattuale livellocontrattuale)
         {
-            return _candidatoRepository.UpdateCandidato(id, candidato);
+            return _livellocontrattualeRepository.UpdateLivelloContrattuale(id, livellocontrattuale);
         }
 
 

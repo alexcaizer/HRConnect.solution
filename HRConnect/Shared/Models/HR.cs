@@ -15,6 +15,6 @@ namespace HRConnect.Shared.Models
         public string? Cognome { get; set; }
         public Sede? Sede { get; set; }
         public ICollection<Colloquio>? Colloqui { get; set; }
-        
+
     }
 }

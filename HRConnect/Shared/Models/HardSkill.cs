@@ -12,10 +12,14 @@ namespace HRConnect.Shared.Models
         [Key]
         public int Id { get; set; }
         public string? TipologiaSkill { get; set; }
+        public bool Attivo { get; set; }
+        public int LivelloContrattualeId { get; set; }
         public ICollection<Candidato>? Candidati { get; set; }
         public ICollection<Dipendente>? Dipendenti { get; set; }
-        public ICollection<LivelloContrattuale>? LivelliContrattuali { get; set; }
-        public bool Attivo { get; set; }
-        
+        public ICollection<Contratto>? Contratti { get; set; }
+        public LivelloContrattuale? LivelliContrattuali { get; set; }
+
+
     }
+
 }

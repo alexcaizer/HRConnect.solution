@@ -39,6 +39,7 @@ namespace HRConnect.Server.Repository
                 nuovoColloquio.Sede = colloquio.Sede;
                 nuovoColloquio.Valutazione = colloquio.Valutazione;
                 nuovoColloquio.Note = colloquio.Note;
+                nuovoColloquio.Sede = colloquio.Sede;
                 _context.SaveChanges();
 
             }

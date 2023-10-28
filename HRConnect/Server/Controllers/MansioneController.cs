@@ -6,41 +6,41 @@ namespace HRConnect.Server.Controllers
 {
 
     [ApiController]
-    [Route("api/candidati")]
-    public class CandidatiController : ControllerBase
+    [Route("api/mansione")]
+    public class MansioneController : ControllerBase
     {
-        private ICandidatoRepository _candidatoRepository;
-        public CandidatiController(ICandidatoRepository candidatoRepository)
+        private IMansioneRepository _mansioneRepository;
+        public MansioneController(IMansioneRepository mansioneRepository)
         {
-            _candidatoRepository = candidatoRepository;
+            _mansioneRepository = mansioneRepository;
         }
 
         [HttpGet("Lista")]
-        public ActionResult<IEnumerable<Candidato>> GetAllCandidati()
+        public ActionResult<IEnumerable<Mansione>> GetAllMansioni()
         {
-            return _candidatoRepository.GetAllCandidati().ToList();
+            return _mansioneRepository.GetAllMansioni().ToList();
         }
         [HttpDelete("{id}")]
-        public void DeleteCandidato(int id)
+        public void DeleteMansione(int id)
         {
-            _candidatoRepository.DeleteCandidato(id);
+            _mansioneRepository.DeleteMansione(id);
         }
 
         [HttpPost("Add")]
-        public ActionResult AddCandidato([FromBody] Candidato nuovoCandidato)
+        public ActionResult AddMansione([FromBody] Mansione nuovoMansione)
         {
-            if (nuovoCandidato == null)
+            if (nuovoMansione == null)
             {
-                return BadRequest("I dati del candidato sono incompleti.");
+                return BadRequest("I dati della mansione sono incompleti.");
             }
-            _candidatoRepository.AddCandidato(nuovoCandidato);
+            _mansioneRepository.AddMansione(nuovoMansione);
             return Ok();
         }
 
         [HttpPut("Aggiorna")]
-        public ActionResult<Candidato> UpdateCandidato(int id, Candidato candidato)
+        public ActionResult<Mansione> UpdateMansione(int id, Mansione mansione)
         {
-            return _candidatoRepository.UpdateCandidato(id, candidato);
+            return _mansioneRepository.UpdateMansione(id, mansione);
         }
 
 
