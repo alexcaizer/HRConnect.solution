@@ -7,44 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Pages\Dipendente.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.10" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Shared\HRConnect.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Pages\CRUD_Dipendente\" />
-    <Folder Include="Pages\CRUD_HardSkill\" />
-    <Folder Include="Pages\CRUD_TitoloDiStudio\" />
-    <Folder Include="Pages\CRUD_Contratti\" />
-    <Folder Include="Pages\CRUD_Documenti\" />
-    <Folder Include="Pages\CRUD_Benefits\" />
-    <Folder Include="Pages\CRUD_Mansioni\" />
-    <Folder Include="Pages\CRUD_CreazioneColloquio\" />
-    <Folder Include="Pages\CRUD_DatiCandidatoSkills\" />
-    <Folder Include="Pages\CRUD_DatiCandidato\" />
-    <Folder Include="Pages\CRUD_LivelliContrattuali\" />
-    <Folder Include="Pages\CRUD_SoftSkill\" />
-    <Folder Include="Pages\CRUD_AnagraficaSedi\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\Dipendente.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\Dipendente.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Pages\Dipendente.razor" />
   </ItemGroup>
 
 </Project>

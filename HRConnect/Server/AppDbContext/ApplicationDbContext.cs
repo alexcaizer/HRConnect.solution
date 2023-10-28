@@ -34,11 +34,40 @@ namespace HRConnect.Server.AppDbContext
                 .HasOne(c => c.Sede)
                 .WithOne(c => c.HR);
 
+            //modelBuilder.Entity<Candidato>()
+            //    .HasOne(c => c.Colloquio)
+            //    .WithOne(c => c.Candidato)
+            //    .HasForeignKey<Candidato>(c => c.ColloquioId);
+
+            modelBuilder.Entity<Colloquio>()
+                .HasOne(c => c.HR)
+                .WithMany(c => c.Colloqui)
+                .HasForeignKey(c => c.HRId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Colloquio>()
+                .HasOne(c => c.Sede)
+                .WithMany(c => c.Colloqui)
+                .HasForeignKey(c => c.SedeId)
+                .OnDelete(DeleteBehavior.NoAction);
+
             modelBuilder.Entity<Dipendente>()
                 .HasOne(c => c.LivelliContrattuali)
                 .WithOne(c => c.Dipendente)
-                .HasForeignKey<Dipendente>(c => c.LivelloContrattualeId);
+                .HasForeignKey<Dipendente>(c => c.LivelloContrattualeId)
+                .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<HardSkill>()
+                .HasOne(c => c.LivelliContrattuali)
+                .WithOne(c => c.HardSkill)
+                .HasForeignKey<HardSkill>(c => c.LivelloContrattualeId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<SoftSkill>()
+                .HasOne(c => c.LivelloContrattuale)
+                .WithOne(c => c.SoftSkill)
+                .HasForeignKey<SoftSkill>(c => c.LivelloContrattualeId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             /* modelBuilder.Entity<PosizioneAperte>()
                  .HasOne(c => c.Contrattos)

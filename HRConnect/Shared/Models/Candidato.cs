@@ -23,8 +23,6 @@ namespace HRConnect.Shared.Models
         public int ContrattoId { get; set; }
         public int CittaId { get; set; }
         public int ColloquioId { get; set; }
-
-
         public ICollection<SoftSkill>? SoftSkills { get; set; }
         public ICollection<HardSkill>? HardSkills { get; set; }
         public ICollection<EsperienzaLavorativa>? EsperienzeLavorative { get; set; }

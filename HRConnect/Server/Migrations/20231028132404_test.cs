@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRConnect.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class test : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,25 +31,12 @@ namespace HRConnect.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    TipologiaDocumento = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Attivo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Documenti", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "HardSkills",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipologiaSkill = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Attivo = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_HardSkills", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -70,14 +57,14 @@ namespace HRConnect.Server.Migrations
                 name: "LivelliContrattuali",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Livello = table.Column<int>(type: "int", nullable: false),
                     Attivo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LivelliContrattuali", x => x.ID);
+                    table.PrimaryKey("PK_LivelliContrattuali", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,26 +73,12 @@ namespace HRConnect.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Descrizione = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Descrizione = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Attivo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Mansioni", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SoftSkills",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipologiaSkill = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Attivo = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SoftSkills", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -128,9 +101,9 @@ namespace HRConnect.Server.Migrations
                 {
                     SedeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Descrizione = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Indirizzo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Recapito = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Descrizione = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Indirizzo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Recapito = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HRId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -151,65 +124,58 @@ namespace HRConnect.Server.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TipoContratto = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LivelloContrattualeID = table.Column<int>(type: "int", nullable: true),
-                    Attivo = table.Column<bool>(type: "bit", nullable: false)
+                    Attivo = table.Column<bool>(type: "bit", nullable: false),
+                    LivelloContrattualeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Contratti", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Contratti_LivelliContrattuali_LivelloContrattualeID",
-                        column: x => x.LivelloContrattualeID,
+                        name: "FK_Contratti_LivelliContrattuali_LivelloContrattualeId",
+                        column: x => x.LivelloContrattualeId,
                         principalTable: "LivelliContrattuali",
-                        principalColumn: "ID");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "HardSkillLivelloContrattuale",
-                columns: table => new
-                {
-                    HardSkillsId = table.Column<int>(type: "int", nullable: false),
-                    LivelliContrattualiID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_HardSkillLivelloContrattuale", x => new { x.HardSkillsId, x.LivelliContrattualiID });
-                    table.ForeignKey(
-                        name: "FK_HardSkillLivelloContrattuale_HardSkills_HardSkillsId",
-                        column: x => x.HardSkillsId,
-                        principalTable: "HardSkills",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_HardSkillLivelloContrattuale_LivelliContrattuali_LivelliContrattualiID",
-                        column: x => x.LivelliContrattualiID,
-                        principalTable: "LivelliContrattuali",
-                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "LivelloContrattualeSoftSkill",
+                name: "HardSkills",
                 columns: table => new
                 {
-                    DescrizioneLavoriID = table.Column<int>(type: "int", nullable: false),
-                    SoftSkillsId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipologiaSkill = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Attivo = table.Column<bool>(type: "bit", nullable: false),
+                    LivelloContrattualeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LivelloContrattualeSoftSkill", x => new { x.DescrizioneLavoriID, x.SoftSkillsId });
+                    table.PrimaryKey("PK_HardSkills", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_LivelloContrattualeSoftSkill_LivelliContrattuali_DescrizioneLavoriID",
-                        column: x => x.DescrizioneLavoriID,
+                        name: "FK_HardSkills_LivelliContrattuali_LivelloContrattualeId",
+                        column: x => x.LivelloContrattualeId,
                         principalTable: "LivelliContrattuali",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SoftSkills",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipologiaSkill = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Attivo = table.Column<bool>(type: "bit", nullable: false),
+                    LivelloContrattualeId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SoftSkills", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_LivelloContrattualeSoftSkill_SoftSkills_SoftSkillsId",
-                        column: x => x.SoftSkillsId,
-                        principalTable: "SoftSkills",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_SoftSkills_LivelliContrattuali_LivelloContrattualeId",
+                        column: x => x.LivelloContrattualeId,
+                        principalTable: "LivelliContrattuali",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -219,13 +185,41 @@ namespace HRConnect.Server.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SedeId = table.Column<int>(type: "int", nullable: true)
+                    SedeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Citta", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Citta_Sedi_SedeId",
+                        column: x => x.SedeId,
+                        principalTable: "Sedi",
+                        principalColumn: "SedeId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Colloqui",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DataColloquio = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Valutazione = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HRId = table.Column<int>(type: "int", nullable: false),
+                    SedeId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Colloqui", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Colloqui_HRs_HRId",
+                        column: x => x.HRId,
+                        principalTable: "HRs",
+                        principalColumn: "HRId");
+                    table.ForeignKey(
+                        name: "FK_Colloqui_Sedi_SedeId",
                         column: x => x.SedeId,
                         principalTable: "Sedi",
                         principalColumn: "SedeId");
@@ -239,10 +233,10 @@ namespace HRConnect.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Cognome = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ContrattoId = table.Column<int>(type: "int", nullable: true),
-                    SedeId = table.Column<int>(type: "int", nullable: true),
-                    LivelliContrattualiID = table.Column<int>(type: "int", nullable: true),
-                    MansioneId = table.Column<int>(type: "int", nullable: true)
+                    ContrattoId = table.Column<int>(type: "int", nullable: false),
+                    SedeId = table.Column<int>(type: "int", nullable: false),
+                    LivelloContrattualeId = table.Column<int>(type: "int", nullable: false),
+                    MansioneId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -251,22 +245,73 @@ namespace HRConnect.Server.Migrations
                         name: "FK_Dipendenti_Contratti_ContrattoId",
                         column: x => x.ContrattoId,
                         principalTable: "Contratti",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Dipendenti_LivelliContrattuali_LivelliContrattualiID",
-                        column: x => x.LivelliContrattualiID,
+                        name: "FK_Dipendenti_LivelliContrattuali_LivelloContrattualeId",
+                        column: x => x.LivelloContrattualeId,
                         principalTable: "LivelliContrattuali",
-                        principalColumn: "ID");
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Dipendenti_Mansioni_MansioneId",
                         column: x => x.MansioneId,
                         principalTable: "Mansioni",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Dipendenti_Sedi_SedeId",
                         column: x => x.SedeId,
                         principalTable: "Sedi",
-                        principalColumn: "SedeId");
+                        principalColumn: "SedeId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ContrattoHardSkill",
+                columns: table => new
+                {
+                    ContrattiId = table.Column<int>(type: "int", nullable: false),
+                    HardSkillsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContrattoHardSkill", x => new { x.ContrattiId, x.HardSkillsId });
+                    table.ForeignKey(
+                        name: "FK_ContrattoHardSkill_Contratti_ContrattiId",
+                        column: x => x.ContrattiId,
+                        principalTable: "Contratti",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ContrattoHardSkill_HardSkills_HardSkillsId",
+                        column: x => x.HardSkillsId,
+                        principalTable: "HardSkills",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ContrattoSoftSkill",
+                columns: table => new
+                {
+                    ContrattiId = table.Column<int>(type: "int", nullable: false),
+                    SoftSkillsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContrattoSoftSkill", x => new { x.ContrattiId, x.SoftSkillsId });
+                    table.ForeignKey(
+                        name: "FK_ContrattoSoftSkill_Contratti_ContrattiId",
+                        column: x => x.ContrattiId,
+                        principalTable: "Contratti",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ContrattoSoftSkill_SoftSkills_SoftSkillsId",
+                        column: x => x.SoftSkillsId,
+                        principalTable: "SoftSkills",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -277,15 +322,15 @@ namespace HRConnect.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Cognome = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ComuneDiNascita = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProvinciaDiNascita = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StatoDiNascita = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CittaId = table.Column<int>(type: "int", nullable: true),
                     DocumentoID = table.Column<int>(type: "int", nullable: false),
-                    ContrattoId = table.Column<int>(type: "int", nullable: true),
-                    TitoloDiStudioId = table.Column<int>(type: "int", nullable: true)
+                    ContrattoId = table.Column<int>(type: "int", nullable: false),
+                    CittaId = table.Column<int>(type: "int", nullable: false),
+                    ColloquioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -294,23 +339,26 @@ namespace HRConnect.Server.Migrations
                         name: "FK_Candidati_Citta_CittaId",
                         column: x => x.CittaId,
                         principalTable: "Citta",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Candidati_Colloqui_ColloquioId",
+                        column: x => x.ColloquioId,
+                        principalTable: "Colloqui",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Candidati_Contratti_ContrattoId",
                         column: x => x.ContrattoId,
                         principalTable: "Contratti",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Candidati_Documenti_DocumentoID",
                         column: x => x.DocumentoID,
                         principalTable: "Documenti",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Candidati_TitoliDiStudio_TitoloDiStudioId",
-                        column: x => x.TitoloDiStudioId,
-                        principalTable: "TitoliDiStudio",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -434,37 +482,27 @@ namespace HRConnect.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Colloqui",
+                name: "CandidatoTitoloDiStudio",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DataColloquio = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CandidatoId = table.Column<int>(type: "int", nullable: true),
-                    HRId = table.Column<int>(type: "int", nullable: true),
-                    SedeId = table.Column<int>(type: "int", nullable: true),
-                    Valutazione = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CandidatiID = table.Column<int>(type: "int", nullable: false)
+                    CandidatiId = table.Column<int>(type: "int", nullable: false),
+                    TitoloDiStudioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Colloqui", x => x.Id);
+                    table.PrimaryKey("PK_CandidatoTitoloDiStudio", x => new { x.CandidatiId, x.TitoloDiStudioId });
                     table.ForeignKey(
-                        name: "FK_Colloqui_Candidati_CandidatoId",
-                        column: x => x.CandidatoId,
+                        name: "FK_CandidatoTitoloDiStudio_Candidati_CandidatiId",
+                        column: x => x.CandidatiId,
                         principalTable: "Candidati",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Colloqui_HRs_HRId",
-                        column: x => x.HRId,
-                        principalTable: "HRs",
-                        principalColumn: "HRId");
-                    table.ForeignKey(
-                        name: "FK_Colloqui_Sedi_SedeId",
-                        column: x => x.SedeId,
-                        principalTable: "Sedi",
-                        principalColumn: "SedeId");
+                        name: "FK_CandidatoTitoloDiStudio_TitoliDiStudio_TitoloDiStudioId",
+                        column: x => x.TitoloDiStudioId,
+                        principalTable: "TitoliDiStudio",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -475,11 +513,11 @@ namespace HRConnect.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DataInizio = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DataFine = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    MansioneId = table.Column<int>(type: "int", nullable: true),
                     Azienda = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Descrizione = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ContrattoId = table.Column<int>(type: "int", nullable: true),
-                    CandidatoId = table.Column<int>(type: "int", nullable: true)
+                    Mansione = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Contratto = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CandidatoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -488,17 +526,8 @@ namespace HRConnect.Server.Migrations
                         name: "FK_EsperienzeLavorative_Candidati_CandidatoId",
                         column: x => x.CandidatoId,
                         principalTable: "Candidati",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_EsperienzeLavorative_Contratti_ContrattoId",
-                        column: x => x.ContrattoId,
-                        principalTable: "Contratti",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_EsperienzeLavorative_Mansioni_MansioneId",
-                        column: x => x.MansioneId,
-                        principalTable: "Mansioni",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -512,6 +541,12 @@ namespace HRConnect.Server.Migrations
                 column: "CittaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Candidati_ColloquioId",
+                table: "Candidati",
+                column: "ColloquioId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Candidati_ContrattoId",
                 table: "Candidati",
                 column: "ContrattoId");
@@ -521,11 +556,6 @@ namespace HRConnect.Server.Migrations
                 table: "Candidati",
                 column: "DocumentoID",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Candidati_TitoloDiStudioId",
-                table: "Candidati",
-                column: "TitoloDiStudioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CandidatoHardSkill_HardSkillsId",
@@ -538,14 +568,15 @@ namespace HRConnect.Server.Migrations
                 column: "SoftSkillsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Citta_SedeId",
-                table: "Citta",
-                column: "SedeId");
+                name: "IX_CandidatoTitoloDiStudio_TitoloDiStudioId",
+                table: "CandidatoTitoloDiStudio",
+                column: "TitoloDiStudioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Colloqui_CandidatoId",
-                table: "Colloqui",
-                column: "CandidatoId");
+                name: "IX_Citta_SedeId",
+                table: "Citta",
+                column: "SedeId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Colloqui_HRId",
@@ -558,9 +589,19 @@ namespace HRConnect.Server.Migrations
                 column: "SedeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contratti_LivelloContrattualeID",
+                name: "IX_Contratti_LivelloContrattualeId",
                 table: "Contratti",
-                column: "LivelloContrattualeID");
+                column: "LivelloContrattualeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ContrattoHardSkill_HardSkillsId",
+                table: "ContrattoHardSkill",
+                column: "HardSkillsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ContrattoSoftSkill_SoftSkillsId",
+                table: "ContrattoSoftSkill",
+                column: "SoftSkillsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DipendenteHardSkill_HardSkillsId",
@@ -578,9 +619,10 @@ namespace HRConnect.Server.Migrations
                 column: "ContrattoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dipendenti_LivelliContrattualiID",
+                name: "IX_Dipendenti_LivelloContrattualeId",
                 table: "Dipendenti",
-                column: "LivelliContrattualiID");
+                column: "LivelloContrattualeId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Dipendenti_MansioneId",
@@ -598,29 +640,21 @@ namespace HRConnect.Server.Migrations
                 column: "CandidatoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EsperienzeLavorative_ContrattoId",
-                table: "EsperienzeLavorative",
-                column: "ContrattoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EsperienzeLavorative_MansioneId",
-                table: "EsperienzeLavorative",
-                column: "MansioneId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_HardSkillLivelloContrattuale_LivelliContrattualiID",
-                table: "HardSkillLivelloContrattuale",
-                column: "LivelliContrattualiID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_LivelloContrattualeSoftSkill_SoftSkillsId",
-                table: "LivelloContrattualeSoftSkill",
-                column: "SoftSkillsId");
+                name: "IX_HardSkills_LivelloContrattualeId",
+                table: "HardSkills",
+                column: "LivelloContrattualeId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sedi_HRId",
                 table: "Sedi",
                 column: "HRId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SoftSkills_LivelloContrattualeId",
+                table: "SoftSkills",
+                column: "LivelloContrattualeId",
                 unique: true);
         }
 
@@ -637,7 +671,13 @@ namespace HRConnect.Server.Migrations
                 name: "CandidatoSoftSkill");
 
             migrationBuilder.DropTable(
-                name: "Colloqui");
+                name: "CandidatoTitoloDiStudio");
+
+            migrationBuilder.DropTable(
+                name: "ContrattoHardSkill");
+
+            migrationBuilder.DropTable(
+                name: "ContrattoSoftSkill");
 
             migrationBuilder.DropTable(
                 name: "DipendenteHardSkill");
@@ -649,25 +689,22 @@ namespace HRConnect.Server.Migrations
                 name: "EsperienzeLavorative");
 
             migrationBuilder.DropTable(
-                name: "HardSkillLivelloContrattuale");
-
-            migrationBuilder.DropTable(
-                name: "LivelloContrattualeSoftSkill");
-
-            migrationBuilder.DropTable(
                 name: "Benefits");
 
             migrationBuilder.DropTable(
-                name: "Dipendenti");
-
-            migrationBuilder.DropTable(
-                name: "Candidati");
+                name: "TitoliDiStudio");
 
             migrationBuilder.DropTable(
                 name: "HardSkills");
 
             migrationBuilder.DropTable(
+                name: "Dipendenti");
+
+            migrationBuilder.DropTable(
                 name: "SoftSkills");
+
+            migrationBuilder.DropTable(
+                name: "Candidati");
 
             migrationBuilder.DropTable(
                 name: "Mansioni");
@@ -676,13 +713,13 @@ namespace HRConnect.Server.Migrations
                 name: "Citta");
 
             migrationBuilder.DropTable(
+                name: "Colloqui");
+
+            migrationBuilder.DropTable(
                 name: "Contratti");
 
             migrationBuilder.DropTable(
                 name: "Documenti");
-
-            migrationBuilder.DropTable(
-                name: "TitoliDiStudio");
 
             migrationBuilder.DropTable(
                 name: "Sedi");

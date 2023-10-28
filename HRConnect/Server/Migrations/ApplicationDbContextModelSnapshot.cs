@@ -67,6 +67,51 @@ namespace HRConnect.Server.Migrations
                     b.ToTable("CandidatoSoftSkill");
                 });
 
+            modelBuilder.Entity("CandidatoTitoloDiStudio", b =>
+                {
+                    b.Property<int>("CandidatiId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TitoloDiStudioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CandidatiId", "TitoloDiStudioId");
+
+                    b.HasIndex("TitoloDiStudioId");
+
+                    b.ToTable("CandidatoTitoloDiStudio");
+                });
+
+            modelBuilder.Entity("ContrattoHardSkill", b =>
+                {
+                    b.Property<int>("ContrattiId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HardSkillsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ContrattiId", "HardSkillsId");
+
+                    b.HasIndex("HardSkillsId");
+
+                    b.ToTable("ContrattoHardSkill");
+                });
+
+            modelBuilder.Entity("ContrattoSoftSkill", b =>
+                {
+                    b.Property<int>("ContrattiId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SoftSkillsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ContrattiId", "SoftSkillsId");
+
+                    b.HasIndex("SoftSkillsId");
+
+                    b.ToTable("ContrattoSoftSkill");
+                });
+
             modelBuilder.Entity("DipendenteHardSkill", b =>
                 {
                     b.Property<int>("DipendentiId")
@@ -124,23 +169,25 @@ namespace HRConnect.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CittaId")
+                    b.Property<int>("CittaId")
                         .HasColumnType("int");
 
                     b.Property<string>("Cognome")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ColloquioId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ComuneDiNascita")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ContrattoId")
+                    b.Property<int>("ContrattoId")
                         .HasColumnType("int");
 
                     b.Property<int>("DocumentoID")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
@@ -155,19 +202,17 @@ namespace HRConnect.Server.Migrations
                     b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TitoloDiStudioId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CittaId");
+
+                    b.HasIndex("ColloquioId")
+                        .IsUnique();
 
                     b.HasIndex("ContrattoId");
 
                     b.HasIndex("DocumentoID")
                         .IsUnique();
-
-                    b.HasIndex("TitoloDiStudioId");
 
                     b.ToTable("Candidati");
                 });
@@ -183,12 +228,13 @@ namespace HRConnect.Server.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SedeId")
+                    b.Property<int>("SedeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SedeId");
+                    b.HasIndex("SedeId")
+                        .IsUnique();
 
                     b.ToTable("Citta");
                 });
@@ -201,30 +247,22 @@ namespace HRConnect.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CandidatiID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CandidatoId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("DataColloquio")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("HRId")
+                    b.Property<int>("HRId")
                         .HasColumnType("int");
 
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SedeId")
+                    b.Property<int>("SedeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Valutazione")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CandidatoId");
 
                     b.HasIndex("HRId");
 
@@ -244,7 +282,7 @@ namespace HRConnect.Server.Migrations
                     b.Property<bool>("Attivo")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("LivelloContrattualeID")
+                    b.Property<int>("LivelloContrattualeId")
                         .HasColumnType("int");
 
                     b.Property<string>("TipoContratto")
@@ -252,7 +290,7 @@ namespace HRConnect.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LivelloContrattualeID");
+                    b.HasIndex("LivelloContrattualeId");
 
                     b.ToTable("Contratti");
                 });
@@ -268,26 +306,27 @@ namespace HRConnect.Server.Migrations
                     b.Property<string>("Cognome")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ContrattoId")
+                    b.Property<int>("ContrattoId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("LivelliContrattualiID")
+                    b.Property<int>("LivelloContrattualeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MansioneId")
+                    b.Property<int>("MansioneId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SedeId")
+                    b.Property<int>("SedeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ContrattoId");
 
-                    b.HasIndex("LivelliContrattualiID");
+                    b.HasIndex("LivelloContrattualeId")
+                        .IsUnique();
 
                     b.HasIndex("MansioneId");
 
@@ -307,6 +346,9 @@ namespace HRConnect.Server.Migrations
                     b.Property<bool>("Attivo")
                         .HasColumnType("bit");
 
+                    b.Property<string>("TipologiaDocumento")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Documenti");
@@ -323,11 +365,11 @@ namespace HRConnect.Server.Migrations
                     b.Property<string>("Azienda")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CandidatoId")
+                    b.Property<int>("CandidatoId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ContrattoId")
-                        .HasColumnType("int");
+                    b.Property<string>("Contratto")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DataFine")
                         .HasColumnType("datetime2");
@@ -338,16 +380,12 @@ namespace HRConnect.Server.Migrations
                     b.Property<string>("Descrizione")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MansioneId")
-                        .HasColumnType("int");
+                    b.Property<string>("Mansione")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CandidatoId");
-
-                    b.HasIndex("ContrattoId");
-
-                    b.HasIndex("MansioneId");
 
                     b.ToTable("EsperienzeLavorative");
                 });
@@ -382,21 +420,27 @@ namespace HRConnect.Server.Migrations
                     b.Property<bool>("Attivo")
                         .HasColumnType("bit");
 
+                    b.Property<int>("LivelloContrattualeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("TipologiaSkill")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LivelloContrattualeId")
+                        .IsUnique();
 
                     b.ToTable("HardSkills");
                 });
 
             modelBuilder.Entity("HRConnect.Shared.Models.LivelloContrattuale", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Attivo")
                         .HasColumnType("bit");
@@ -404,7 +448,7 @@ namespace HRConnect.Server.Migrations
                     b.Property<int>("Livello")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("LivelliContrattuali");
                 });
@@ -421,7 +465,6 @@ namespace HRConnect.Server.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Descrizione")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -438,18 +481,15 @@ namespace HRConnect.Server.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SedeId"));
 
                     b.Property<string>("Descrizione")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("HRId")
                         .HasColumnType("int");
 
                     b.Property<string>("Indirizzo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Recapito")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SedeId");
@@ -471,10 +511,16 @@ namespace HRConnect.Server.Migrations
                     b.Property<bool>("Attivo")
                         .HasColumnType("bit");
 
+                    b.Property<int>("LivelloContrattualeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("TipologiaSkill")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LivelloContrattualeId")
+                        .IsUnique();
 
                     b.ToTable("SoftSkills");
                 });
@@ -496,36 +542,6 @@ namespace HRConnect.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TitoliDiStudio");
-                });
-
-            modelBuilder.Entity("HardSkillLivelloContrattuale", b =>
-                {
-                    b.Property<int>("HardSkillsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LivelliContrattualiID")
-                        .HasColumnType("int");
-
-                    b.HasKey("HardSkillsId", "LivelliContrattualiID");
-
-                    b.HasIndex("LivelliContrattualiID");
-
-                    b.ToTable("HardSkillLivelloContrattuale");
-                });
-
-            modelBuilder.Entity("LivelloContrattualeSoftSkill", b =>
-                {
-                    b.Property<int>("DescrizioneLavoriID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SoftSkillsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DescrizioneLavoriID", "SoftSkillsId");
-
-                    b.HasIndex("SoftSkillsId");
-
-                    b.ToTable("LivelloContrattualeSoftSkill");
                 });
 
             modelBuilder.Entity("BenefitDipendente", b =>
@@ -573,6 +589,51 @@ namespace HRConnect.Server.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("CandidatoTitoloDiStudio", b =>
+                {
+                    b.HasOne("HRConnect.Shared.Models.Candidato", null)
+                        .WithMany()
+                        .HasForeignKey("CandidatiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HRConnect.Shared.Models.TitoloDiStudio", null)
+                        .WithMany()
+                        .HasForeignKey("TitoloDiStudioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ContrattoHardSkill", b =>
+                {
+                    b.HasOne("HRConnect.Shared.Models.Contratto", null)
+                        .WithMany()
+                        .HasForeignKey("ContrattiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HRConnect.Shared.Models.HardSkill", null)
+                        .WithMany()
+                        .HasForeignKey("HardSkillsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ContrattoSoftSkill", b =>
+                {
+                    b.HasOne("HRConnect.Shared.Models.Contratto", null)
+                        .WithMany()
+                        .HasForeignKey("ContrattiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HRConnect.Shared.Models.SoftSkill", null)
+                        .WithMany()
+                        .HasForeignKey("SoftSkillsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("DipendenteHardSkill", b =>
                 {
                     b.HasOne("HRConnect.Shared.Models.Dipendente", null)
@@ -606,12 +667,22 @@ namespace HRConnect.Server.Migrations
             modelBuilder.Entity("HRConnect.Shared.Models.Candidato", b =>
                 {
                     b.HasOne("HRConnect.Shared.Models.Citta", "Citta")
-                        .WithMany()
-                        .HasForeignKey("CittaId");
+                        .WithMany("Candidati")
+                        .HasForeignKey("CittaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("HRConnect.Shared.Models.Contratto", null)
+                    b.HasOne("HRConnect.Shared.Models.Colloquio", "Colloquio")
+                        .WithOne("Candidato")
+                        .HasForeignKey("HRConnect.Shared.Models.Candidato", "ColloquioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HRConnect.Shared.Models.Contratto", "Contratto")
                         .WithMany("Candidato")
-                        .HasForeignKey("ContrattoId");
+                        .HasForeignKey("ContrattoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("HRConnect.Shared.Models.Documento", "Documento")
                         .WithOne("Candidato")
@@ -619,11 +690,11 @@ namespace HRConnect.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HRConnect.Shared.Models.TitoloDiStudio", null)
-                        .WithMany("Candidati")
-                        .HasForeignKey("TitoloDiStudioId");
-
                     b.Navigation("Citta");
+
+                    b.Navigation("Colloquio");
+
+                    b.Navigation("Contratto");
 
                     b.Navigation("Documento");
                 });
@@ -631,27 +702,27 @@ namespace HRConnect.Server.Migrations
             modelBuilder.Entity("HRConnect.Shared.Models.Citta", b =>
                 {
                     b.HasOne("HRConnect.Shared.Models.Sede", "Sede")
-                        .WithMany()
-                        .HasForeignKey("SedeId");
+                        .WithOne("Cittas")
+                        .HasForeignKey("HRConnect.Shared.Models.Citta", "SedeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Sede");
                 });
 
             modelBuilder.Entity("HRConnect.Shared.Models.Colloquio", b =>
                 {
-                    b.HasOne("HRConnect.Shared.Models.Candidato", "Candidato")
-                        .WithMany("Colloquio")
-                        .HasForeignKey("CandidatoId");
-
                     b.HasOne("HRConnect.Shared.Models.HR", "HR")
                         .WithMany("Colloqui")
-                        .HasForeignKey("HRId");
+                        .HasForeignKey("HRId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("HRConnect.Shared.Models.Sede", "Sede")
                         .WithMany("Colloqui")
-                        .HasForeignKey("SedeId");
-
-                    b.Navigation("Candidato");
+                        .HasForeignKey("SedeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("HR");
 
@@ -662,7 +733,9 @@ namespace HRConnect.Server.Migrations
                 {
                     b.HasOne("HRConnect.Shared.Models.LivelloContrattuale", "LivelloContrattuale")
                         .WithMany("Contratti")
-                        .HasForeignKey("LivelloContrattualeID");
+                        .HasForeignKey("LivelloContrattualeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("LivelloContrattuale");
                 });
@@ -670,20 +743,28 @@ namespace HRConnect.Server.Migrations
             modelBuilder.Entity("HRConnect.Shared.Models.Dipendente", b =>
                 {
                     b.HasOne("HRConnect.Shared.Models.Contratto", "Contratto")
-                        .WithMany()
-                        .HasForeignKey("ContrattoId");
+                        .WithMany("Dipendentes")
+                        .HasForeignKey("ContrattoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("HRConnect.Shared.Models.LivelloContrattuale", "LivelliContrattuali")
-                        .WithMany()
-                        .HasForeignKey("LivelliContrattualiID");
+                        .WithOne("Dipendente")
+                        .HasForeignKey("HRConnect.Shared.Models.Dipendente", "LivelloContrattualeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("HRConnect.Shared.Models.Mansione", "Mansione")
                         .WithMany("Dipendenti")
-                        .HasForeignKey("MansioneId");
+                        .HasForeignKey("MansioneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("HRConnect.Shared.Models.Sede", "Sede")
                         .WithMany("Dipendenti")
-                        .HasForeignKey("SedeId");
+                        .HasForeignKey("SedeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Contratto");
 
@@ -698,21 +779,22 @@ namespace HRConnect.Server.Migrations
                 {
                     b.HasOne("HRConnect.Shared.Models.Candidato", "Candidato")
                         .WithMany("EsperienzeLavorative")
-                        .HasForeignKey("CandidatoId");
-
-                    b.HasOne("HRConnect.Shared.Models.Contratto", "Contratto")
-                        .WithMany()
-                        .HasForeignKey("ContrattoId");
-
-                    b.HasOne("HRConnect.Shared.Models.Mansione", "Mansione")
-                        .WithMany()
-                        .HasForeignKey("MansioneId");
+                        .HasForeignKey("CandidatoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Candidato");
+                });
 
-                    b.Navigation("Contratto");
+            modelBuilder.Entity("HRConnect.Shared.Models.HardSkill", b =>
+                {
+                    b.HasOne("HRConnect.Shared.Models.LivelloContrattuale", "LivelliContrattuali")
+                        .WithOne("HardSkill")
+                        .HasForeignKey("HRConnect.Shared.Models.HardSkill", "LivelloContrattualeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
-                    b.Navigation("Mansione");
+                    b.Navigation("LivelliContrattuali");
                 });
 
             modelBuilder.Entity("HRConnect.Shared.Models.Sede", b =>
@@ -726,46 +808,37 @@ namespace HRConnect.Server.Migrations
                     b.Navigation("HR");
                 });
 
-            modelBuilder.Entity("HardSkillLivelloContrattuale", b =>
+            modelBuilder.Entity("HRConnect.Shared.Models.SoftSkill", b =>
                 {
-                    b.HasOne("HRConnect.Shared.Models.HardSkill", null)
-                        .WithMany()
-                        .HasForeignKey("HardSkillsId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("HRConnect.Shared.Models.LivelloContrattuale", "LivelloContrattuale")
+                        .WithOne("SoftSkill")
+                        .HasForeignKey("HRConnect.Shared.Models.SoftSkill", "LivelloContrattualeId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("HRConnect.Shared.Models.LivelloContrattuale", null)
-                        .WithMany()
-                        .HasForeignKey("LivelliContrattualiID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("LivelloContrattualeSoftSkill", b =>
-                {
-                    b.HasOne("HRConnect.Shared.Models.LivelloContrattuale", null)
-                        .WithMany()
-                        .HasForeignKey("DescrizioneLavoriID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HRConnect.Shared.Models.SoftSkill", null)
-                        .WithMany()
-                        .HasForeignKey("SoftSkillsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("LivelloContrattuale");
                 });
 
             modelBuilder.Entity("HRConnect.Shared.Models.Candidato", b =>
                 {
-                    b.Navigation("Colloquio");
-
                     b.Navigation("EsperienzeLavorative");
+                });
+
+            modelBuilder.Entity("HRConnect.Shared.Models.Citta", b =>
+                {
+                    b.Navigation("Candidati");
+                });
+
+            modelBuilder.Entity("HRConnect.Shared.Models.Colloquio", b =>
+                {
+                    b.Navigation("Candidato");
                 });
 
             modelBuilder.Entity("HRConnect.Shared.Models.Contratto", b =>
                 {
                     b.Navigation("Candidato");
+
+                    b.Navigation("Dipendentes");
                 });
 
             modelBuilder.Entity("HRConnect.Shared.Models.Documento", b =>
@@ -783,6 +856,12 @@ namespace HRConnect.Server.Migrations
             modelBuilder.Entity("HRConnect.Shared.Models.LivelloContrattuale", b =>
                 {
                     b.Navigation("Contratti");
+
+                    b.Navigation("Dipendente");
+
+                    b.Navigation("HardSkill");
+
+                    b.Navigation("SoftSkill");
                 });
 
             modelBuilder.Entity("HRConnect.Shared.Models.Mansione", b =>
@@ -792,14 +871,11 @@ namespace HRConnect.Server.Migrations
 
             modelBuilder.Entity("HRConnect.Shared.Models.Sede", b =>
                 {
+                    b.Navigation("Cittas");
+
                     b.Navigation("Colloqui");
 
                     b.Navigation("Dipendenti");
-                });
-
-            modelBuilder.Entity("HRConnect.Shared.Models.TitoloDiStudio", b =>
-                {
-                    b.Navigation("Candidati");
                 });
 #pragma warning restore 612, 618
         }
